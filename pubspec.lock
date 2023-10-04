@@ -17,6 +17,15 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.11.0"
+  avatar_glow:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: master
+      resolved-ref: ff7a3c803cec0e94efd8d1e0d270cc7029819306
+      url: "https://github.com/apgapg/avatar_glow"
+    source: git
+    version: "3.0.0"
   bloc:
     dependency: "direct main"
     description:

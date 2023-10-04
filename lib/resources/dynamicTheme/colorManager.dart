@@ -7,5 +7,6 @@ static Color lightBlueColor = const Color(0xffD0E7D2);
 static Color darkBeigeColor = const Color(0xffE4DCCF);
 static Color lightBeigeColor = const Color(0xffF0EBE3);
 static Color grayColor =  Colors.grey ;
+static Color WhiteColor = Colors.white ;
 
 }

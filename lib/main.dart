@@ -1,16 +1,17 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:islamic_app/resources/dynamicTheme/colorManager.dart';
 import 'package:islamic_app/widget/CustomBox/CustomCounterBox.dart';
 import 'package:islamic_app/widget/CustomBox/CustomHomeBox.dart';
 import 'package:islamic_app/widget/CustomBox/CustomSalatTimeBox.dart';
 import 'package:islamic_app/widget/CustomBox/CustomTextBox.dart';
 import 'package:islamic_app/widget/CustomBox/CustomIconWithNameBox.dart';
-import 'package:islamic_app/widget/sharedWidget/sharedWidget.dart';
+import 'package:islamic_app/widget/counter.dart';
+import 'package:islamic_app/widget/customAppBar.dart';
+
 import 'package:responsive_framework/responsive_framework.dart';
 import 'widget/CustomBox/CustomQuranBox.dart';
 import 'widget/CustomBox/CustomTodayBox.dart';
-  //flutter pub run easy_localization:generate -S  "assets/translations/" -O "lib/services/Localization" -o "local.dart" -f keys
+//flutter pub run easy_localization:generate -S  "assets/translations/" -O "lib/services/Localization" -o "local.dart" -f keys
 
 String ayah =
     "أَلَمۡ یَأۡنِ لِلَّذِینَ ءَامَنُوۤا۟ أَن تَخۡشَعَ قُلُوبُهُمۡ لِذِكۡرِ ٱللَّهِ وَمَا نَزَلَ مِنَ ٱلۡحَقِّ وَلَا یَكُونُوا۟ كَٱلَّذِینَ أُوتُوا۟ ٱلۡكِتَـٰبَ مِن قَبۡلُ فَطَالَ عَلَیۡهِمُ ٱلۡأَمَدُ فَقَسَتۡ قُلُوبُهُمۡۖ وَكَثِیرࣱ مِّنۡهُمۡ ";
@@ -18,12 +19,19 @@ String ayah =
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+
   runApp(EasyLocalization(
-      child: const MyApp(),
-      supportedLocales: [Locale("en"), Locale("ar")],
-      fallbackLocale: Locale("ar"),
-    //  assetLoader: Codegenerate(),
-      path: "assets/translations/"));
+    supportedLocales: const [
+      Locale('ar'),
+      Locale('en'),
+    ],
+    // assetLoader: const AssetLoader(),
+    saveLocale: true,
+    fallbackLocale: const Locale('ar'),
+    startLocale: const Locale("ar"),
+    path: "assets/translations",
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -46,55 +54,62 @@ class MyApp extends StatelessWidget {
         ],
       ),
       home: Scaffold(
-        appBar: AppBar(
-          title: Text("Islamic app"),
-          backgroundColor: ColorManager.darkGreenColor,
-        ),
+        appBar: CustomAppBar (context ,widget:  Text("Welcome", style: TextStyle(color: Colors.white),),),
         body: SingleChildScrollView(
           child: Column(children: [
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
+            CounterBox(),
             CustomCounterBox(
-                text: ayah, defultTimes: "٣", duration: 3, totalTimes: 250),
-            SharedWidget.Counter(context, duration: 3, height: 5, width: 4),
+                tasbeh: true,
+                text: ayah,
+                defultTimes: "3".tr(),
+                duration: 3,
+                totalTimes: 250),
+            CustomCounterBox(
+                tasbeh: false,
+                text: ayah,
+                defultTimes: "3".tr(),
+                duration: 3,
+                totalTimes: 250),
             CustomTodyBox(
                 imgType: "quran",
-                title: "أية",
-                subTitle: " (21) سورة البقرة ",
+                title: "today_ayah".tr(),
+                subTitle: "surat_elbakra".tr(),
                 text: ayah),
             CustomIconWithNameBox(
                 imgPath: "assets/images/doaa.png",
-                name: "أذكار الصباح",
+                name: "azkar_elsapah".tr(),
                 number: 15,
                 type: true),
             CustomIconWithNameBox(
                 imgPath: "assets/images/doaa.png",
-                name: "أدعية المساء",
+                name: "doaa_elmasa".tr(),
                 number: 15,
                 type: false),
-            CustomAyah(ayah: "الحمد لله رب العالمين", number: 1),
+            CustomAyah(ayah: "thanks_allah_of_all_people".tr(), number: 1),
             CustomSuraNameBox(
-                name: "سورة الفاتحة",
+                name: "surat_elfateha".tr(),
                 numberOfAyah: 1,
-                numberOfGuza: "الجزء الاول"),
+                numberOfGuza: "part_one".tr()),
             CustomMainBox(),
             CustomCategpryBox(
-                title: "القران الكريم", imgPath: "assets/images/pic.png"),
+                title: "quran_elkarem".tr(), imgPath: "assets/images/pic.png"),
             CustomCategpryBox(
-                title: "الاذكار", imgPath: "assets/images/pic.png"),
+                title: "alazkar".tr(), imgPath: "assets/images/pic.png"),
             CustomSalatTimeBox(
-              title: "موعد اذان العصر",
+              title: "elaser_time".tr(),
               time: "5:00 PM",
               active: false,
             ),
             CustomSalatTimeBox(
-              title: "موعد اذان العصر",
+              title: "elaser_time".tr(),
               time: "5:00 AM",
               active: true,
             ),
             CustomTextBox(
-              title: "اذكار الصباح والمساء",
+              title: "suphan_allah_and_elhamed_allah".tr(),
             ),
             CustomTextBox(
                 title: " سبحان الله وبحمده عدد خلقه وزنه عرشه ومداد كلماته ")

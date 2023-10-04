@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:islamic_app/resources/dynamicTheme/colorManager.dart';
 import 'package:islamic_app/resources/dynamicTheme/styleManager.dart';
-import 'package:islamic_app/widget/sharedWidget/sharedTextStyle.dart';
-import 'package:islamic_app/widget/sharedWidget/sharedWidget.dart';
+import 'package:islamic_app/widget/sharedTextStyle.dart';
+import 'package:islamic_app/widget/sharedWidget.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class CustomTodyBox extends StatelessWidget {
@@ -21,6 +21,8 @@ class CustomTodyBox extends StatelessWidget {
   Widget build(BuildContext context) {
     double paddingValue =
         ResponsiveBreakpoints.of(context).largerThan(MOBILE) ? 15.0 : 8.0;
+     double iconSize =
+        ResponsiveBreakpoints.of(context).largerThan(MOBILE) ? 30.0 : 20.0;
 
     return Container(
       width: MediaQuery.of(context).size.width,
@@ -28,21 +30,14 @@ class CustomTodyBox extends StatelessWidget {
       padding: EdgeInsets.all(paddingValue),
       decoration:
           StyleManager.containerStyle(color: ColorManager.lightBeigeColor),
-      child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start, 
+        children: [
+        
         Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                SharedTextStyle.mediumGreenText(context, txt: "$title اليوم"),
-                SharedTextStyle.smallGrayText(context, txt: subTitle),
-              ],
-            ),
-            SizedBox(
-              width: 10,
-            ),
-            CircleAvatar(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [ 
+             CircleAvatar(
               radius: 20,
               backgroundColor: ColorManager.lightGreenColor,
               child: SharedWidget.sharedImage(
@@ -50,6 +45,18 @@ class CustomTodyBox extends StatelessWidget {
                   width: 25,
                   height: 25),
             ),
+            SizedBox(
+              width: 10,
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SharedTextStyle.mediumGreenText(context, txt: title),
+                SharedTextStyle.smallGrayText(context, txt: subTitle),
+              ],
+            ),
+            
+           
           ],
         ),
         SizedBox(
@@ -65,11 +72,12 @@ class CustomTodyBox extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
+               ClickWidget(context,
+                  txt: "قراءة", icon: Icons.menu_book, onTap: () {} ,iconSize: iconSize),
+                            VerticalDivider(thickness: 0.5, color: ColorManager.grayColor),
               ClickWidget(context,
-                  txt: "مشاركة", icon: Icons.share, onTap: () {}),
-              VerticalDivider(thickness: 0.5, color: ColorManager.grayColor),
-              ClickWidget(context,
-                  txt: "قراءة", icon: Icons.menu_book, onTap: () {}),
+                  txt: "مشاركة", icon: Icons.share, onTap: () {} , iconSize: iconSize),
+             
             ],
           ),
         )
@@ -79,7 +87,7 @@ class CustomTodyBox extends StatelessWidget {
 }
 
 Widget ClickWidget(BuildContext context,
-    {required String txt, required IconData icon, required dynamic onTap}) {
+    {required String txt, required IconData icon, required dynamic onTap , required double iconSize}) {
   return InkWell(
     onTap: onTap,
     child: Row(
@@ -89,7 +97,7 @@ Widget ClickWidget(BuildContext context,
         SizedBox(
           width: 5,
         ),
-        Icon(icon, color: ColorManager.darkGreenColor, size: 15),
+        Icon(icon, color: ColorManager.darkGreenColor, size: iconSize),
       ],
     ),
   );

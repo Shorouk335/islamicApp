@@ -2,8 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:islamic_app/resources/dynamicTheme/colorManager.dart';
 import 'package:islamic_app/resources/dynamicTheme/styleManager.dart';
-import 'package:islamic_app/widget/sharedWidget/sharedTextStyle.dart';
-import 'package:islamic_app/widget/sharedWidget/sharedWidget.dart';
+import 'package:islamic_app/widget/sharedTextStyle.dart';
+import 'package:islamic_app/widget/sharedWidget.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class CustomMainBox extends StatelessWidget {
@@ -25,26 +25,9 @@ class CustomMainBox extends StatelessWidget {
           StyleManager.containerStyle(color: ColorManager.lightBlueColor),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Column(
-            children: [
-              SharedWidget.sharedImage(
-                  imgPath: "assets/images/pic1.png",
-                  height: imgValue,
-                  width: imgValue),
-              SharedWidget.sharedButton(context,
-                  txt:"hi".tr(),
-                  color: ColorManager.lightBeigeColor,
-                  txtSize: 18.0,
-                  width: boxWidth,
-                  height: boxHeight),
-              SizedBox(
-                height: 10,
-              ),
-            ],
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
+        children: [ 
+            Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               SizedBox(
@@ -54,8 +37,8 @@ class CustomMainBox extends StatelessWidget {
                 context,
                 txt: "الصلاة القادمة",
               ),
-                SizedBox(
-                height:  height/10,
+              SizedBox(
+                height: height / 10,
               ),
               SharedTextStyle.mediumGreenText(
                 context,
@@ -65,31 +48,36 @@ class CustomMainBox extends StatelessWidget {
                 context,
                 txt: "3:00 PM",
               ),
-              SizedBox(height: height/10),
-              Row(
+              SizedBox(height: height / 10),
+              Row( 
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
+                   Icon(Icons.calendar_month_rounded,
+                      color: ColorManager.darkGreenColor, size: 15.0),
+                   SizedBox(
+                    width: 5,
+                  ),
                   SharedTextStyle.smallGreenText(
                     context,
                     txt: "2024-08-05",
                   ),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  Icon(Icons.calendar_month_rounded,
-                      color: ColorManager.darkGreenColor, size: 15.0)
+                 
+                 
                 ],
               ),
               Row(
                 children: [
-                  SharedTextStyle.smallGreenText(
-                    context,
-                    txt: "Mansoura",
-                  ),
-                  SizedBox(
-                    width: 5,
-                  ),
                   Icon(Icons.location_on,
                       color: ColorManager.darkGreenColor, size: 15.0),
+                    SizedBox(
+                    width: 5,
+                  ),
+                  SharedTextStyle.smallGreenText(
+                    context,
+                    txt: "mansoura".tr(),
+                  ),
+                
+                  
                 ],
               ),
               SizedBox(
@@ -97,6 +85,24 @@ class CustomMainBox extends StatelessWidget {
               )
             ],
           ),
+          Column(
+            children: [
+              SharedWidget.sharedImage(
+                  imgPath: "assets/images/pic1.png",
+                  height: imgValue,
+                  width: imgValue),
+              SharedWidget.sharedButton(context,
+                  txt: "salat_times".tr(),
+                  color: ColorManager.lightBeigeColor,
+                  txtSize: 18.0,
+                  width: boxWidth,
+                  height: boxHeight),
+              SizedBox(
+                height: 10,
+              ),
+            ],
+          ),
+        
         ],
       ),
     );
@@ -109,16 +115,18 @@ class CustomCategpryBox extends StatelessWidget {
   CustomCategpryBox({super.key, required this.title, required this.imgPath});
   @override
   Widget build(BuildContext context) {
-    double width =
-        ResponsiveBreakpoints.of(context).equals(TABLET) ? 3 :  ResponsiveBreakpoints.of(context).largerThan(TABLET) ?3.5 :2.5;
+    double width = ResponsiveBreakpoints.of(context).equals(TABLET)
+        ? 3
+        : ResponsiveBreakpoints.of(context).largerThan(TABLET)
+            ? 3.5
+            : 2.5;
     double height =
         ResponsiveBreakpoints.of(context).largerThan(TABLET) ? 200.0 : 150.0;
     double imgwidth =
-        ResponsiveBreakpoints.of(context).largerThan(TABLET) ? 180.0 : 150.0;
+        ResponsiveBreakpoints.of(context).largerThan(TABLET) ? 180.0 : 110.0;
     double imgheight =
-        ResponsiveBreakpoints.of(context).largerThan(TABLET) ? 150.0 : 110.0;
-    double imgPadding =
-        ResponsiveBreakpoints.of(context).equals(TABLET) ? 80.0 : ResponsiveBreakpoints.of(context).largerThan(TABLET)? 150.0: 30.0;
+        ResponsiveBreakpoints.of(context).largerThan(TABLET) ? 150.0 : 100.0;
+  
 
     return Container(
       height: height,
@@ -126,23 +134,29 @@ class CustomCategpryBox extends StatelessWidget {
       decoration: StyleManager.containerStyle(
         color: ColorManager.lightBeigeColor,
       ),
+      padding: EdgeInsets.all(8.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(right: 10, top: 5),
-            child: SharedTextStyle.largeGreenText(
-              context,
-              txt: title,
-            ),
-          ),
-          Padding(
-              padding: EdgeInsets.only(
-                right: imgPadding,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              SharedTextStyle.largeGreenText(
+                context,
+                txt: title,
               ),
-              child: SharedWidget.sharedImage(
-                  imgPath: imgPath, width: imgwidth, height: imgheight))
+              Spacer()
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Spacer(),
+              SharedWidget.sharedImage(
+                  imgPath: imgPath, width: imgwidth, height: imgheight),
+            ],
+          ),
         ],
       ),
     );

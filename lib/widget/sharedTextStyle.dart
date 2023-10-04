@@ -2,7 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:islamic_app/resources/dynamicTheme/colorManager.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
-class SharedTextStyle {
+class SharedTextStyle { 
+   static Widget LargeWhiteText(BuildContext context ,{required String? txt  }) {
+    return Text(
+      txt ?? "",
+      style: TextStyle(
+          color: ColorManager.WhiteColor,
+          fontSize: ResponsiveValue(
+                context ,
+                conditionalValues: [
+                     Condition.equals(name: MOBILE, value: 25.0),
+                     Condition.equals(name: TABLET, value: 35.0),
+                     Condition.equals(name: DESKTOP, value: 45.0),
+
+                ],
+                defaultValue: 25.0,
+
+          ).value,
+          fontWeight: FontWeight.bold),
+    );
+  }  
   static Widget largeGreenText(BuildContext context ,{required String? txt  }) {
     return Text(
       txt ?? "",

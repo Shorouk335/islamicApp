@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:islamic_app/resources/dynamicTheme/colorManager.dart';
-import 'package:islamic_app/widget/sharedWidget/sharedTextStyle.dart';
+import 'package:islamic_app/widget/sharedTextStyle.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class CustomTextBox extends StatelessWidget {

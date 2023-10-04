@@ -1,3 +1,18 @@
 {
- "hi" : "مواقد الصلاة"
+ "salat_times" :  "مواقيت الصلاة",
+ "islamic_app" :  "تطبيق اسلامي",
+ "3" :  "٣" ,
+ "today_ayah" : "اية اليوم",
+ "surat_elbakra" :" سورة البقرة (٣٣)" ,
+ "azkar_elsapah" :"اذكار الصباح",
+ "doaa_elmasa" : "أدعية المساء" ,
+ "thanks_allah_of_all_people" :"الحمد لله رب العالمين",
+ "surat_elfateha" : "سورة الفاتحة" ,
+ "part_one" : "الجزء الاول",
+ "quran_elkarem" :"القران الكريم",
+ "alazkar" :"الاذكار" ,
+ "elaser_time" : "موعد اذان العصر",
+ "suphan_allah_and_elhamed_allah":"سبحان الله والحمد لله",
+ "click_here" :"انقر هنا",
+ "mansoura" :"المنصورة"
 }
